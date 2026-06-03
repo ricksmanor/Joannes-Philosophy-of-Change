@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Foundations Daily Reset — Jo to Joanne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink: #e8a4a8; --pink-mid: #d4787e; --mid: #b85560;
+      --burgundy: #6b1832; --burg-deep: #3d0d1c;
+      --cream: #fdf4f0; --text-dark: #2a0e18; --text-mid: #5a2030;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(253,244,240,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(107,24,50,0.1); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; background: linear-gradient(to right, var(--pink-mid), var(--burgundy)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--burgundy); }
+    .divider { height: 3px; background: linear-gradient(to right, var(--pink), var(--mid), var(--burgundy)); }
+
+    /* HERO */
+    .hero {
+      min-height: 75vh; display: flex; align-items: center;
+      padding: 9rem 3rem 6rem;
+      background: linear-gradient(to right, rgba(232,164,168,0.25) 0%, rgba(253,244,240,0.7) 45%, rgba(107,24,50,0.3) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-bar { position: absolute; right: 0; top: 0; bottom: 0; width: 5px; background: linear-gradient(to bottom, var(--pink), var(--burgundy)); }
+    .hero-content { max-width: 740px; animation: fadeUp 1.2s ease both; }
+    .eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--burgundy); opacity: 0.75; margin-bottom: 1.5rem; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.05; color: var(--text-dark); margin-bottom: 1.5rem; }
+    .hero h1 em { font-style: italic; color: var(--burgundy); }
+    .hero-sub { font-size: 1rem; font-weight: 300; line-height: 1.85; color: var(--text-mid); max-width: 520px; margin-bottom: 2rem; }
+    .hero-note { border-left: 3px solid var(--burgundy); padding: 1rem 1.5rem; background: rgba(107,24,50,0.04); max-width: 520px; font-size: 0.9rem; font-weight: 300; line-height: 1.85; color: var(--text-mid); }
+
+    /* WHAT ARE FOUNDATIONS */
+    .what { padding: 7rem 3rem; background: var(--cream); }
+    .what-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .section-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--burgundy); opacity: 0.7; margin-bottom: 1rem; }
+    .section-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.2; }
+    .section-text { font-size: 0.93rem; font-weight: 300; line-height: 1.95; color: var(--text-mid); margin-bottom: 1rem; }
+
+    /* NINE THINGS */
+    .nine { display: flex; flex-direction: column; gap: 0; }
+    .nine-item { display: flex; align-items: center; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid rgba(107,24,50,0.08); }
+    .nine-item:last-child { border-bottom: none; }
+    .nine-num { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; color: var(--burgundy); opacity: 0.35; min-width: 28px; }
+    .nine-word { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; font-style: italic; color: var(--text-dark); }
+
+    /* PHILOSOPHY STRIP */
+    .philosophy-strip { padding: 6rem 3rem; background: var(--burg-deep); text-align: center; position: relative; overflow: hidden; }
+    .philosophy-strip::before { content: ''; position: absolute; bottom: -8rem; left: 50%; transform: translateX(-50%); width: 50vw; height: 50vw; border-radius: 50%; background: rgba(232,164,168,0.04); }
+    .philosophy-strip p { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3.5vw, 2.8rem); font-weight: 300; color: var(--cream); max-width: 760px; margin: 0 auto; line-height: 1.4; position: relative; z-index: 1; }
+    .philosophy-strip p em { font-style: italic; color: var(--pink); }
+    .philosophy-strip span { display: block; font-family: 'Jost', sans-serif; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,164,168,0.5); margin-top: 1.5rem; position: relative; z-index: 1; }
+
+    /* HOW IT WORKS */
+    .how { padding: 7rem 3rem; background: #fbedf0; }
+    .how-inner { max-width: 900px; margin: 0 auto; }
+    .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 2.5rem; }
+    .how-item { padding: 2.5rem; }
+    .how-item:nth-child(1) { background: #fbedf0; border: 1px solid rgba(232,164,168,0.4); }
+    .how-item:nth-child(2) { background: #f2d4d6; }
+    .how-item:nth-child(3) { background: #e8bfc2; }
+    .how-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--burgundy); opacity: 0.18; line-height: 1; margin-bottom: 0.5rem; }
+    .how-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.6rem; }
+    .how-text { font-size: 0.86rem; font-weight: 300; color: var(--text-mid); line-height: 1.8; }
+
+    /* PRICING — THE RESET OPTIONS */
+    .pricing { padding: 7rem 3rem; background: var(--cream); }
+    .pricing-inner { max-width: 900px; margin: 0 auto; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 3rem; }
+
+    .reset-card { padding: 4rem 3.5rem; display: flex; flex-direction: column; }
+    .reset-card:nth-child(1) { background: #fbedf0; }
+    .reset-card:nth-child(2) { background: linear-gradient(160deg, var(--mid), var(--burgundy)); }
+
+    .reset-tag { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .reset-card:nth-child(1) .reset-tag { color: var(--burgundy); opacity: 0.6; }
+    .reset-card:nth-child(2) .reset-tag { color: rgba(232,164,168,0.7); }
+
+    .reset-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
+    .reset-card:nth-child(1) .reset-name { color: var(--text-dark); }
+    .reset-card:nth-child(2) .reset-name { color: var(--cream); }
+
+    .reset-desc { font-size: 0.9rem; font-weight: 300; line-height: 1.9; margin-bottom: 2rem; flex-grow: 1; }
+    .reset-card:nth-child(1) .reset-desc { color: var(--text-mid); }
+    .reset-card:nth-child(2) .reset-desc { color: rgba(253,244,240,0.82); }
+
+    .reset-positioning { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; line-height: 1.5; padding: 1.2rem 0; border-top: 1px solid rgba(107,24,50,0.1); border-bottom: 1px solid rgba(107,24,50,0.1); margin-bottom: 2rem; }
+    .reset-card:nth-child(1) .reset-positioning { color: var(--text-dark); }
+    .reset-card:nth-child(2) .reset-positioning { color: var(--cream); border-top-color: rgba(253,244,240,0.15); border-bottom-color: rgba(253,244,240,0.15); }
+
+    .reset-btn { display: inline-block; padding: 1rem 2rem; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; text-align: center; transition: all 0.3s; }
+    .reset-card:nth-child(1) .reset-btn { background: var(--burgundy); color: var(--cream); }
+    .reset-card:nth-child(1) .reset-btn:hover { background: var(--burg-deep); }
+    .reset-card:nth-child(2) .reset-btn { border: 1px solid rgba(232,164,168,0.6); color: var(--pink); }
+    .reset-card:nth-child(2) .reset-btn:hover { background: rgba(232,164,168,0.15); }
+
+    .reset-note { font-size: 0.75rem; font-weight: 300; margin-top: 1rem; }
+    .reset-card:nth-child(1) .reset-note { color: var(--text-mid); opacity: 0.6; }
+    .reset-card:nth-child(2) .reset-note { color: rgba(253,244,240,0.45); }
+
+    /* WHAT YOU GET */
+    .included { padding: 7rem 3rem; background: #fbedf0; }
+    .included-inner { max-width: 860px; margin: 0 auto; }
+    .included-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 2.5rem; }
+    .included-item { padding: 1.5rem 2rem; background: var(--cream); font-size: 0.88rem; font-weight: 300; color: var(--text-mid); line-height: 1.7; padding-left: 3rem; position: relative; }
+    .included-item::before { content: '✓'; position: absolute; left: 1.5rem; color: var(--burgundy); font-size: 0.8rem; }
+
+    /* GRADIENT KEYLINE */
+    .keyline-strip { padding: 5rem 3rem; background: linear-gradient(to right, var(--pink) 0%, var(--mid) 50%, var(--burgundy) 100%); text-align: center; }
+    .keyline-strip p { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3.5vw, 2.8rem); font-weight: 300; font-style: italic; color: var(--cream); max-width: 680px; margin: 0 auto; line-height: 1.4; }
+
+    /* CTA */
+    .cta { padding: 7rem 3rem; background: var(--burg-deep); text-align: center; position: relative; overflow: hidden; }
+    .cta::before { content: ''; position: absolute; bottom: -6rem; left: 50%; transform: translateX(-50%); width: 45vw; height: 45vw; border-radius: 50%; background: rgba(232,164,168,0.04); }
+    .cta-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--pink); opacity: 0.55; margin-bottom: 1.5rem; }
+    .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; color: var(--cream); margin-bottom: 1.2rem; line-height: 1.2; position: relative; z-index: 1; }
+    .cta h2 em { font-style: italic; color: var(--pink); }
+    .cta p { font-size: 0.93rem; font-weight: 300; color: rgba(253,244,240,0.62); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.85; position: relative; z-index: 1; }
+    .cta-btn { display: inline-block; padding: 1.1rem 3rem; border: 1px solid var(--pink); color: var(--pink); font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; position: relative; z-index: 1; }
+    .cta-btn:hover { background: var(--pink); color: var(--burg-deep); }
+
+    footer { padding: 3rem; background: var(--text-dark); display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--pink); }
+    .footer-line { font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(253,244,240,0.35); text-transform: uppercase; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; } .nav-links { display: none; }
+      .hero { padding: 6rem 1.5rem 4rem; }
+      .what-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .how-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .included-grid { grid-template-columns: 1fr; }
+      .what, .how, .pricing, .included { padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Jo to Joanne</a>
+  <ul class="nav-links">
+    <li><a href="about.html">Story</a></li>
+    <li><a href="philosophy.html">Philosophy</a></li>
+    <li><a href="project-you.html">Project You</a></li>
+    <li><a href="anxiety.html">Anxiety Reset</a></li>
+    <li><a href="contact.html">Begin</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Foundations Daily Reset</p>
+    <h1>Nine things.<br>Every day.<br><em>Everything changes.</em></h1>
+    <p class="hero-sub">Not a programme you complete. A practice you build. The daily foundations are not the beginning of the work — they are the work. Everything else grows from here.</p>
+    <div class="hero-note">
+      Flexible entry. Come in anytime. Stay as long as you want.<br>
+      A longer commitment should feel rewarded — because real change takes repetition.
+    </div>
+  </div>
+  <div class="hero-bar"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT ARE THE FOUNDATIONS -->
+<section class="what">
+  <div class="what-inner">
+    <div>
+      <p class="section-label">What the foundations are</p>
+      <h2 class="section-heading">Nine non-negotiables.<br>Done daily.</h2>
+      <p class="section-text">Most people have never done the basics consistently. Not because they didn't want to — but because nobody ever showed them what the basics actually were.</p>
+      <p class="section-text">These nine things are not preparation for change. They are the change. Every small positive deposit adds up. One day you feel it.</p>
+      <p class="section-text">No philosophy. No deep mindset work. Just the nine things, every day, for as long as you need them.</p>
+    </div>
+    <div class="nine">
+      <div class="nine-item"><span class="nine-num">01</span><span class="nine-word">Fitness</span></div>
+      <div class="nine-item"><span class="nine-num">02</span><span class="nine-word">Nutrition</span></div>
+      <div class="nine-item"><span class="nine-num">03</span><span class="nine-word">Water</span></div>
+      <div class="nine-item"><span class="nine-num">04</span><span class="nine-word">Walking</span></div>
+      <div class="nine-item"><span class="nine-num">05</span><span class="nine-word">Breathwork</span></div>
+      <div class="nine-item"><span class="nine-num">06</span><span class="nine-word">Meditation</span></div>
+      <div class="nine-item"><span class="nine-num">07</span><span class="nine-word">Affirmation</span></div>
+      <div class="nine-item"><span class="nine-num">08</span><span class="nine-word">Gratitude</span></div>
+      <div class="nine-item"><span class="nine-num">09</span><span class="nine-word">Journal</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PHILOSOPHY STRIP -->
+<section class="philosophy-strip">
+  <p>The power of the foundations<br><em>should not be underestimated.</em>
+  <span>— Joanne</span></p>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-inner">
+    <p class="section-label">How it works</p>
+    <h2 class="section-heading">Simple. Daily. Yours.</h2>
+    <div class="how-grid">
+      <div class="how-item">
+        <div class="how-num">01</div>
+        <h3 class="how-title">Choose your reset</h3>
+        <p class="how-text">Monthly Reset for flexible entry. 3-Month Reset for deeper commitment and nervous system change through repetition. Both give you the full foundations practice.</p>
+      </div>
+      <div class="how-item">
+        <div class="how-num">02</div>
+        <h3 class="how-title">Show up daily</h3>
+        <p class="how-text">Nine things. Every day. Not perfectly — consistently. The nervous system responds to repetition, not perfection. Show up as you are.</p>
+      </div>
+      <div class="how-item">
+        <div class="how-num">03</div>
+        <h3 class="how-title">Feel the shift</h3>
+        <p class="how-text">It won't happen on day one. But one day — you'll feel it. Sleep changes. Thoughts change. Energy changes. The body follows. That's the foundations working.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="pricing-inner">
+    <p class="section-label">Choose your reset</p>
+    <h2 class="section-heading">A longer commitment<br>should feel rewarded.</h2>
+    <p class="section-text" style="max-width:580px;">Because real change takes repetition. The pricing reflects the philosophy — not a discount for buying more months, but an invitation to give the system enough time to change.</p>
+    <div class="pricing-grid">
+
+      <div class="reset-card">
+        <p class="reset-tag">Flexible entry</p>
+        <h3 class="reset-name">Monthly<br>Reset</h3>
+        <p class="reset-desc">For women who want to begin gently and build consistency one day at a time. Come in anytime. Stay as long as you want. Leave when you're ready.</p>
+        <p class="reset-positioning">Flexible entry. Full foundations. No long-term commitment required.</p>
+        <a href="contact.html" class="reset-btn">Begin Monthly Reset</a>
+        <p class="reset-note">Cancel anytime. No lock-in.</p>
+      </div>
+
+      <div class="reset-card">
+        <p class="reset-tag">Deeper commitment</p>
+        <h3 class="reset-name">3-Month<br>Reset</h3>
+        <p class="reset-desc">For women ready to fully commit to rebuilding their foundations through daily self-return practice. Three months gives the nervous system enough time to genuinely change.</p>
+        <p class="reset-positioning">Give the system enough time to change.</p>
+        <a href="contact.html" class="reset-btn">Begin 3-Month Reset</a>
+        <p class="reset-note">Lower monthly cost. Built for real change.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT YOU GET -->
+<section class="included">
+  <div class="included-inner">
+    <p class="section-label">What's included</p>
+    <h2 class="section-heading">Everything you need.<br>Nothing you don't.</h2>
+    <div class="included-grid">
+      <div class="included-item">The nine daily foundations framework</div>
+      <div class="included-item">Joanne's nutrition basics and general guidance</div>
+      <div class="included-item">Daily structure and accountability tools</div>
+      <div class="included-item">Walking therapy guidance</div>
+      <div class="included-item">Breathwork and meditation starting points</div>
+      <div class="included-item">Journaling prompts and gratitude practice</div>
+      <div class="included-item">Community of women doing the same work</div>
+      <div class="included-item">A place to return to every single day</div>
+    </div>
+  </div>
+</section>
+
+<!-- KEYLINE -->
+<section class="keyline-strip">
+  <p>What you do today is your tomorrow.</p>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <p class="cta-label">Begin Your Foundations</p>
+  <h2>Nine things.<br>Every day.<br><em>Start where you are.</em></h2>
+  <p>You do not need to be ready. You just need to begin. The foundations meet you exactly where you are.</p>
+  <a href="contact.html" class="cta-btn">Begin Your Reset</a>
+</section>
+
+<footer>
+  <div class="footer-logo">Jo to Joanne</div>
+  <div class="footer-line">Self Return · Somerset</div>
+  <div class="footer-line">© 2026 Joanne</div>
+</footer>
+
+</body>
+</html>

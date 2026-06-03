@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anxiety Mastery & System Reset — Jo to Joanne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink: #e8a4a8; --pink-mid: #d4787e; --mid: #b85560;
+      --burgundy: #6b1832; --burg-deep: #3d0d1c;
+      --cream: #fdf4f0; --text-dark: #2a0e18; --text-mid: #5a2030;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(253,244,240,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(107,24,50,0.1); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; background: linear-gradient(to right, var(--pink-mid), var(--burgundy)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--burgundy); }
+    .divider { height: 3px; background: linear-gradient(to right, var(--pink), var(--mid), var(--burgundy)); }
+
+    /* HERO — deliberately calmer */
+    .hero {
+      min-height: 80vh; display: flex; align-items: center;
+      padding: 9rem 3rem 6rem;
+      background: linear-gradient(160deg, rgba(232,164,168,0.2) 0%, rgba(253,244,240,0.8) 50%, rgba(107,24,50,0.15) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-bar { position: absolute; right: 0; top: 0; bottom: 0; width: 5px; background: linear-gradient(to bottom, var(--pink), var(--burgundy)); }
+    .hero-content { max-width: 740px; animation: fadeUp 1.2s ease both; }
+    .eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--burgundy); opacity: 0.75; margin-bottom: 1.5rem; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.05; color: var(--text-dark); margin-bottom: 1.5rem; }
+    .hero h1 em { font-style: italic; color: var(--burgundy); }
+    .framework { display: flex; align-items: center; gap: 0; margin: 1.5rem 0 2rem; }
+    .fw-step { padding: 0.9rem 1.6rem; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; }
+    .fw-step:nth-child(1) { background: var(--pink); color: var(--text-dark); }
+    .fw-step:nth-child(2) { background: var(--mid); color: var(--cream); }
+    .fw-step:nth-child(3) { background: var(--burgundy); color: var(--cream); }
+    .fw-arrow { padding: 0 0.4rem; color: var(--mid); font-size: 0.9rem; }
+    .hero-sub { font-size: 1rem; font-weight: 300; line-height: 1.85; color: var(--text-mid); max-width: 520px; }
+
+    /* SECTIONS */
+    .section { padding: 6rem 3rem; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--burgundy); opacity: 0.7; margin-bottom: 1rem; }
+    .section-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.2; }
+    .section-text { font-size: 0.93rem; font-weight: 300; line-height: 1.95; color: var(--text-mid); margin-bottom: 1rem; }
+    .section-cream { background: var(--cream); }
+    .section-pink { background: #fbedf0; }
+
+    /* TRUTH — two column */
+    .truth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .truth-left { background: #fbedf0; padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+    .truth-right { background: linear-gradient(135deg, var(--mid), var(--burgundy)); padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+    .truth-left h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 2.8vw, 2.4rem); font-weight: 300; color: var(--text-dark); margin-bottom: 1.2rem; line-height: 1.2; }
+    .truth-left p { font-size: 0.9rem; font-weight: 300; line-height: 1.95; color: var(--text-mid); margin-bottom: 0.8rem; }
+    .truth-right p { font-size: 0.9rem; font-weight: 300; line-height: 1.95; color: rgba(253,244,240,0.82); margin-bottom: 0.8rem; }
+    .truth-right h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; font-style: italic; color: var(--cream); margin-bottom: 1rem; line-height: 1.3; }
+
+    /* THREE PHASES */
+    .phases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 2.5rem; }
+    .phase { padding: 3rem 2.5rem; }
+    .phase:nth-child(1) { background: #fbedf0; }
+    .phase:nth-child(2) { background: #f0d0d4; }
+    .phase:nth-child(3) { background: linear-gradient(135deg, #d49aa0, var(--burgundy)); }
+    .phase-word { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; font-style: italic; line-height: 1; margin-bottom: 0.3rem; }
+    .phase:nth-child(1) .phase-word, .phase:nth-child(2) .phase-word { color: var(--burgundy); }
+    .phase:nth-child(3) .phase-word { color: var(--cream); }
+    .phase-days { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .phase:nth-child(1) .phase-days, .phase:nth-child(2) .phase-days { color: var(--text-mid); opacity: 0.6; }
+    .phase:nth-child(3) .phase-days { color: rgba(253,244,240,0.55); }
+    .phase-text { font-size: 0.87rem; font-weight: 300; line-height: 1.85; }
+    .phase:nth-child(1) .phase-text, .phase:nth-child(2) .phase-text { color: var(--text-mid); }
+    .phase:nth-child(3) .phase-text { color: rgba(253,244,240,0.82); }
+
+    /* SIGNS */
+    .signs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 2rem; }
+    .sign { padding: 1.2rem 1.5rem 1.2rem 3rem; background: #fbedf0; font-size: 0.88rem; font-weight: 300; color: var(--text-mid); line-height: 1.7; position: relative; }
+    .sign::before { content: '—'; position: absolute; left: 1.5rem; color: var(--burgundy); }
+
+    /* GRADIENT QUOTE */
+    .gradient-quote { padding: 6rem 3rem; background: linear-gradient(to right, var(--pink) 0%, var(--mid) 50%, var(--burgundy) 100%); text-align: center; }
+    .gradient-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 3.2rem); font-weight: 300; font-style: italic; color: var(--cream); max-width: 680px; margin: 0 auto; line-height: 1.4; }
+
+    /* NEXT STEP */
+    .next-step { padding: 6rem 3rem; background: var(--cream); text-align: center; }
+    .next-step h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; color: var(--text-dark); margin-bottom: 1rem; }
+    .next-step p { font-size: 0.93rem; font-weight: 300; color: var(--text-mid); max-width: 520px; margin: 0 auto 1rem; line-height: 1.85; }
+    .next-arrow { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--burgundy); margin: 1.5rem 0; }
+
+    /* CTA */
+    .cta { padding: 7rem 3rem; background: var(--burg-deep); text-align: center; position: relative; overflow: hidden; }
+    .cta::before { content: ''; position: absolute; top: -5rem; right: -5rem; width: 35vw; height: 35vw; border-radius: 50%; background: rgba(232,164,168,0.04); }
+    .cta .eyebrow { color: var(--pink); opacity: 0.6; }
+    .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; color: var(--cream); margin-bottom: 1.2rem; line-height: 1.2; position: relative; z-index: 1; }
+    .cta h2 em { font-style: italic; color: var(--pink); }
+    .cta p { font-size: 0.93rem; font-weight: 300; color: rgba(253,244,240,0.62); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.85; position: relative; z-index: 1; }
+    .cta-btn { display: inline-block; padding: 1.1rem 3rem; border: 1px solid var(--pink); color: var(--pink); font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; position: relative; z-index: 1; }
+    .cta-btn:hover { background: var(--pink); color: var(--burg-deep); }
+
+    footer { padding: 3rem; background: var(--text-dark); display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--pink); }
+    .footer-line { font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(253,244,240,0.35); text-transform: uppercase; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; } .nav-links { display: none; }
+      .hero { padding: 6rem 1.5rem 4rem; }
+      .framework { flex-wrap: wrap; } .fw-arrow { display: none; }
+      .truth-grid { grid-template-columns: 1fr; }
+      .section { padding: 4rem 1.5rem; }
+      .phases-grid { grid-template-columns: 1fr; }
+      .signs-grid { grid-template-columns: 1fr; }
+      .gradient-quote { padding: 5rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Jo to Joanne</a>
+  <ul class="nav-links">
+    <li><a href="about.html">Story</a></li>
+    <li><a href="philosophy.html">Philosophy</a></li>
+    <li><a href="project-you.html">Project You</a></li>
+    <li><a href="anxiety.html">Anxiety Reset</a></li>
+    <li><a href="contact.html">Begin</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">30-Day Programme</p>
+    <h1>Anxiety Mastery<br>&amp; <em>System Reset.</em></h1>
+    <div class="framework">
+      <div class="fw-step">Understand</div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-step">Own</div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-step">Rewire</div>
+    </div>
+    <p class="hero-sub">Anxiety isn't a flaw. It's a system running the wrong programme. This 30-day reset helps women understand anxiety properly, regulate the nervous system, and begin rebuilding calmer, healthier emotional patterns from the inside out.</p>
+  </div>
+  <div class="hero-bar"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TRUTH ABOUT ANXIETY -->
+<div class="truth-grid">
+  <div class="truth-left">
+    <p class="section-label">The truth about anxiety</p>
+    <h2>Your anxiety isn't weakness.<br>It's protection running on old information.</h2>
+    <p>Anxiety is the body's protection system responding to stress, overwhelm, emotional memory, and learned patterns.</p>
+    <p>For many women, the nervous system becomes stuck in survival mode — reacting to everyday life like danger.</p>
+  </div>
+  <div class="truth-right">
+    <h3>The goal is not to fight yourself.</h3>
+    <p>The goal is to understand the system well enough to begin working with it instead of against it.</p>
+    <p>Once you understand what your anxiety actually is — where it lives, why it fires, what it's trying to do — everything changes.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- THREE PHASES -->
+<section class="section section-cream">
+  <div class="section-inner">
+    <p class="section-label">The 30 days</p>
+    <h2 class="section-heading">Understand. Own. Rewire.<br>Three phases. One reset.</h2>
+    <p class="section-text">Each phase builds on the last. By day 30 you won't just feel better — you'll understand why. And that understanding is what makes it last.</p>
+    <div class="phases-grid">
+      <div class="phase">
+        <p class="phase-word">Understand</p>
+        <p class="phase-days">Days 1 – 10</p>
+        <p class="phase-text">Learn what anxiety actually is, why it happens, where it lives in the body, and how your nervous system responds to stress. Most women feel relief here before anything else changes — because finally having a name for it is half the work.</p>
+      </div>
+      <div class="phase">
+        <p class="phase-word">Own</p>
+        <p class="phase-days">Days 11 – 20</p>
+        <p class="phase-text">Breathwork, body awareness, emotional observation, and learning to respond instead of react. Stop fearing anxiety and start understanding it. Learning to sit with it instead of running from it.</p>
+      </div>
+      <div class="phase">
+        <p class="phase-word">Rewire</p>
+        <p class="phase-days">Days 21 – 30</p>
+        <p class="phase-text">Build healthier emotional patterns, calmer nervous system responses, and new subconscious defaults that support everyday life. By day 30 you'll have a deeper understanding of your patterns, your nervous system, and how to work with yourself differently.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SIGNS -->
+<section class="section section-pink">
+  <div class="section-inner">
+    <p class="section-label">Does this sound familiar</p>
+    <h2 class="section-heading">The anxiety that doesn't look like anxiety.</h2>
+    <div class="signs-grid">
+      <div class="sign">You overthink every conversation afterwards</div>
+      <div class="sign">You feel constantly on edge without knowing why</div>
+      <div class="sign">Your body is exhausted but your mind won't stop</div>
+      <div class="sign">You catastrophise quietly, on your own</div>
+      <div class="sign">Sleep never feels fully restful</div>
+      <div class="sign">You feel it in your chest, stomach, or jaw</div>
+      <div class="sign">You struggle to switch off even when nothing is wrong</div>
+      <div class="sign">You've been told you worry too much</div>
+    </div>
+  </div>
+</section>
+
+<!-- GRADIENT QUOTE -->
+<section class="gradient-quote">
+  <blockquote>Be the engineer of your own machine.</blockquote>
+</section>
+
+<!-- NEXT STEP -->
+<section class="next-step">
+  <p class="section-label">The natural journey</p>
+  <h2>Start here.<br>Go deeper when you're ready.</h2>
+  <p>The Anxiety Reset is where many women begin. It's focused, contained, and gives you something real in 30 days.</p>
+  <p class="next-arrow">When you're ready — Project You takes everything further.</p>
+  <p>You don't have to decide that now. Just begin.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<section class="cta">
+  <p class="eyebrow">Begin the Reset</p>
+  <h2>30 days to understand<br>what your anxiety<br><em>actually is.</em></h2>
+  <p>You do not need to pretend you're coping. You just need a place to begin honestly.</p>
+  <a href="contact.html" class="cta-btn">Begin the Reset</a>
+</section>
+
+<footer>
+  <div class="footer-logo">Jo to Joanne</div>
+  <div class="footer-line">Self Return · Somerset</div>
+  <div class="footer-line">© 2026 Joanne</div>
+</footer>
+
+</body>
+</html>

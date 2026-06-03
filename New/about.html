@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Joanne — Jo to Joanne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink: #e8a4a8; --pink-mid: #d4787e; --mid: #b85560;
+      --burgundy: #6b1832; --burg-deep: #3d0d1c;
+      --cream: #fdf4f0; --text-dark: #2a0e18; --text-mid: #5a2030;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(253,244,240,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(107,24,50,0.1); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; background: linear-gradient(to right, var(--pink-mid), var(--burgundy)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--burgundy); }
+    .divider { height: 3px; background: linear-gradient(to right, var(--pink), var(--mid), var(--burgundy)); }
+
+    /* HERO */
+    .hero {
+      min-height: 70vh; display: flex; align-items: center;
+      padding: 9rem 3rem 6rem;
+      background: linear-gradient(to right, rgba(232,164,168,0.3) 0%, rgba(184,85,96,0.2) 50%, rgba(107,24,50,0.38) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-bar { position: absolute; right: 0; top: 0; bottom: 0; width: 5px; background: linear-gradient(to bottom, var(--pink), var(--burgundy)); }
+    .hero-content { max-width: 760px; animation: fadeUp 1.2s ease both; }
+    .eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--burgundy); opacity: 0.75; margin-bottom: 0.5rem; }
+    .eyebrow-main { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--burgundy); opacity: 0.75; margin-bottom: 1.5rem; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.05; color: var(--text-dark); margin-bottom: 1.5rem; }
+    .hero h1 em { font-style: italic; color: var(--burgundy); }
+    .hero-sub { font-size: 1rem; font-weight: 300; line-height: 1.85; color: var(--text-mid); max-width: 560px; }
+
+    /* SECTIONS */
+    .section { padding: 6rem 3rem; }
+    .section-inner { max-width: 860px; margin: 0 auto; }
+    .section-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--burgundy); opacity: 0.7; margin-bottom: 1rem; }
+    .section-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--text-dark); margin-bottom: 2rem; line-height: 1.2; }
+    .section-text { font-size: 0.93rem; font-weight: 300; line-height: 1.95; color: var(--text-mid); margin-bottom: 1rem; }
+
+    /* WORD LIST */
+    .word-list { display: flex; flex-direction: column; gap: 0.3rem; margin: 1.5rem 0; }
+    .word-list span { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; font-style: italic; color: var(--burgundy); line-height: 1.4; }
+
+    /* ALTERNATING SECTIONS */
+    .section-pink { background: #fbedf0; }
+    .section-cream { background: var(--cream); }
+    .section-light { background: #f5e0e2; }
+
+    /* GRADIENT QUOTE */
+    .gradient-quote {
+      padding: 7rem 3rem;
+      background: linear-gradient(to right, var(--pink) 0%, var(--mid) 50%, var(--burgundy) 100%);
+      text-align: center;
+    }
+    .gradient-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4.5vw, 3.8rem); font-weight: 300; color: var(--cream); max-width: 760px; margin: 0 auto; line-height: 1.2; }
+    .gradient-quote blockquote em { font-style: italic; }
+    .gradient-quote cite { display: block; font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(253,244,240,0.55); font-style: normal; margin-top: 1.5rem; }
+
+    /* DARK SECTION */
+    .section-dark { background: var(--burg-deep); padding: 6rem 3rem; }
+    .section-dark .section-heading { color: var(--cream); }
+    .section-dark .section-text { color: rgba(253,244,240,0.78); }
+    .section-dark .section-label { color: var(--pink); opacity: 0.6; }
+
+    /* NOT LIST */
+    .not-list { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0 2rem; }
+    .not-item { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: rgba(253,244,240,0.85); padding: 0.6rem 0; border-bottom: 1px solid rgba(253,244,240,0.08); }
+    .not-item:last-child { border-bottom: none; }
+
+    /* CTA */
+    .cta { padding: 7rem 3rem; background: #fbedf0; text-align: center; }
+    .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 300; color: var(--text-dark); margin-bottom: 1.2rem; line-height: 1.25; }
+    .cta p { font-size: 0.93rem; font-weight: 300; color: var(--text-mid); max-width: 460px; margin: 0 auto 2.5rem; line-height: 1.85; }
+    .cta-btn { display: inline-block; padding: 1.1rem 3rem; background: var(--burgundy); color: var(--cream); font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+    .cta-btn:hover { background: var(--burg-deep); transform: translateY(-2px); }
+
+    footer { padding: 3rem; background: var(--text-dark); display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--pink); }
+    .footer-line { font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(253,244,240,0.35); text-transform: uppercase; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; } .nav-links { display: none; }
+      .hero { padding: 6rem 1.5rem 4rem; }
+      .section { padding: 4rem 1.5rem; }
+      .gradient-quote { padding: 5rem 1.5rem; }
+      .section-dark { padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Jo to Joanne</a>
+  <ul class="nav-links">
+    <li><a href="about.html">Story</a></li>
+    <li><a href="philosophy.html">Philosophy</a></li>
+    <li><a href="project-you.html">Project You</a></li>
+    <li><a href="anxiety.html">Anxiety Reset</a></li>
+    <li><a href="contact.html">Begin</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Jo to Joanne</p>
+    <p class="eyebrow-main">Self Return · Project You</p>
+    <h1>Jo survived.<br><em>Joanne learned how to live.</em></h1>
+    <p class="hero-sub">This is not the story of becoming somebody else. This is the story of finally understanding who I already was.<br><br>Project You was built through lived experience, observation, rebuilding, nervous system understanding, emotional awareness, movement, healing, and years of quietly asking deeper questions about what actually creates change.</p>
+  </div>
+  <div class="hero-bar"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHO JO WAS -->
+<section class="section section-cream">
+  <div class="section-inner">
+    <p class="section-label">Who Jo was</p>
+    <h2 class="section-heading">Jo spent years surviving.</h2>
+    <p class="section-text">Jo left school young. She struggled academically and spent years believing she was behind everyone else without truly understanding why.</p>
+    <p class="section-text">For a long time, Jo adapted by masking, surviving, observing, pushing through, and carrying things quietly. She felt deeply, thought deeply, and noticed everything — but spent much of her life trying to fit into systems, expectations, and environments that never fully matched how her mind actually worked.</p>
+    <p class="section-text">Long before she understood words like ADHD, autism, AuDHD, nervous system regulation, emotional conditioning, subconscious patterns, or identity work — Joanne already knew she experienced the world differently.</p>
+    <p class="section-text">She noticed everything.</p>
+    <div class="word-list">
+      <span>Patterns.</span>
+      <span>Energy.</span>
+      <span>Behaviour.</span>
+      <span>Emotional shifts.</span>
+      <span>The way people spoke.</span>
+      <span>The things left unsaid.</span>
+    </div>
+    <p class="section-text">For years she carried that difference without fully understanding it. Learning about AuDHD later in life did not change who Joanne was. It helped her finally understand who Jo had always been. And in many ways, that understanding gave her her life back.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THE SHIFT -->
+<section class="section section-pink">
+  <div class="section-inner">
+    <p class="section-label">The shift</p>
+    <h2 class="section-heading">The change didn't happen overnight.<br>It happened piece by piece.</h2>
+    <div class="word-list">
+      <span>Walking.</span>
+      <span>Breathwork.</span>
+      <span>Nutrition.</span>
+      <span>Movement.</span>
+      <span>Journaling.</span>
+      <span>Responsibility.</span>
+      <span>Self-observation.</span>
+      <span>Learning how the nervous system works.</span>
+      <span>Understanding emotional patterns.</span>
+    </div>
+    <p class="section-text">Learning that healing was not about becoming somebody new — but slowly returning to herself underneath years of survival mode.</p>
+    <p class="section-text">That was the beginning of Joanne.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LOOKING BACK -->
+<section class="section section-cream">
+  <div class="section-inner">
+    <p class="section-label">Joanne looking back at Jo</p>
+    <h2 class="section-heading">Joanne does not look back at Jo with shame.</h2>
+    <p class="section-text">That is one of the biggest changes of all. Now Joanne can talk honestly about Jo without judgement, hiding, or pretending. Not because the past disappeared. But because understanding replaced shame.</p>
+    <p class="section-text">The things Joanne once judged herself for became the very things that helped her understand people more deeply.</p>
+    <div class="word-list">
+      <span>The overthinking.</span>
+      <span>The observing.</span>
+      <span>The emotional intensity.</span>
+      <span>The constant questioning.</span>
+      <span>The feeling of being different.</span>
+    </div>
+    <p class="section-text">Now those experiences form part of the philosophy behind Project You.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GRADIENT QUOTE -->
+<section class="gradient-quote">
+  <blockquote>
+    If you look after the inside,<br>
+    <em>the outside looks after itself.</em>
+    <cite>— Joanne. Said for over 30 years.</cite>
+  </blockquote>
+</section>
+
+<div class="divider"></div>
+
+<!-- THE PHILOSOPHY -->
+<section class="section section-pink">
+  <div class="section-inner">
+    <p class="section-label">The philosophy</p>
+    <h2 class="section-heading">If you look after the inside,<br>the outside looks after itself.</h2>
+    <p class="section-text">Joanne has been saying those words for over 30 years. Long before she understood the science or psychology behind them. Because deep down, she already understood something important.</p>
+    <p class="section-text">The way we think, breathe, move, regulate, speak to ourselves, rest, nourish ourselves, and emotionally process life shapes everything around us.</p>
+    <p class="section-text">Project You was built around that understanding.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT PROJECT YOU IS -->
+<section class="section section-cream">
+  <div class="section-inner">
+    <p class="section-label">What Project You really is</p>
+    <h2 class="section-heading">A philosophy with a method.</h2>
+    <p class="section-text">Project You combines nervous system awareness, mindset work, movement, emotional regulation, nutrition education, identity work, and self-leadership into a practical inside-out transformation process.</p>
+    <p class="section-text">The goal is not perfection.</p>
+    <p class="section-text">The goal is helping women understand themselves deeply enough to lead themselves differently.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL — DARK -->
+<section class="section-dark">
+  <div class="section-inner">
+    <p class="section-label">No hiding</p>
+    <h2 class="section-heading">No hiding from the history of Jo.</h2>
+    <p class="section-text">Joanne believes real change begins when we stop running from ourselves and start understanding ourselves honestly.</p>
+    <div class="not-list">
+      <p class="not-item">Not fixing.</p>
+      <p class="not-item">Not performing.</p>
+      <p class="not-item">Not pretending.</p>
+      <p class="not-item">Understanding.</p>
+    </div>
+    <p class="section-text">Because sometimes the version of you you've been searching for isn't somebody new. It's the version of you underneath everything you had to survive.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Ready to begin<br>your journey?</h2>
+  <p>Your transformation. Joanne's mission.</p>
+  <a href="contact.html" class="cta-btn">Begin Your Journey</a>
+</section>
+
+<footer>
+  <div class="footer-logo">Jo to Joanne</div>
+  <div class="footer-line">Self Return · Somerset</div>
+  <div class="footer-line">© 2026 Joanne</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Philosophy of Change — Jo to Joanne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink: #e8a4a8; --pink-mid: #d4787e; --mid: #b85560;
+      --burgundy: #6b1832; --burg-deep: #3d0d1c;
+      --cream: #fdf4f0; --text-dark: #2a0e18; --text-mid: #5a2030;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(253,246,240,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(123,30,53,0.1); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; background: linear-gradient(to right, var(--pink-mid), var(--burgundy)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--burgundy); }
+    .divider { height: 3px; background: linear-gradient(to right, var(--pink), var(--mid), var(--burgundy)); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 85vh;
+      display: flex; align-items: center;
+      padding: 10rem 3rem 6rem;
+      position: relative; overflow: hidden;
+      background: var(--cream);
+    }
+    /* Large background J */
+    .hero::before {
+      content: 'J';
+      position: absolute;
+      right: -2rem; top: 50%;
+      transform: translateY(-55%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 60vw;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(242,196,206,0.18);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .hero-bar { position: absolute; right: 0; top: 0; bottom: 0; width: 5px; background: linear-gradient(to bottom, var(--pink), var(--burgundy)); }
+    .hero-content { position: relative; z-index: 2; max-width: 780px; animation: fadeUp 1.2s ease both; }
+    .eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--burgundy); opacity: 0.7; margin-bottom: 1.8rem; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6.5vw, 6rem); font-weight: 300; line-height: 1.02; color: var(--text-dark); margin-bottom: 2rem; }
+    .hero h1 em { font-style: italic; color: var(--burgundy); }
+    .hero-disclaimer {
+      display: inline-block;
+      border-left: 3px solid var(--burgundy);
+      padding: 1rem 1.5rem;
+      background: rgba(123,30,53,0.04);
+      max-width: 560px;
+    }
+    .hero-disclaimer p { font-size: 0.9rem; font-weight: 300; line-height: 1.85; color: var(--text-mid); }
+    .hero-disclaimer p + p { margin-top: 0.6rem; }
+
+    /* ── OPENING STATEMENT ── */
+    .opening {
+      padding: 7rem 3rem;
+      background: var(--burg-deep);
+      position: relative; overflow: hidden;
+    }
+    .opening::before {
+      content: '';
+      position: absolute; top: -10rem; right: -10rem;
+      width: 40vw; height: 40vw; border-radius: 50%;
+      background: rgba(245,208,216,0.05);
+    }
+    .opening-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+    .opening-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--pink); opacity: 0.55; margin-bottom: 2rem; }
+    .opening-lines { display: flex; flex-direction: column; gap: 1.2rem; }
+    .opening-line { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 2.8vw, 2.2rem); font-weight: 300; color: var(--cream); line-height: 1.35; }
+    .opening-line.struck { text-decoration: line-through; opacity: 0.35; font-style: italic; }
+    .opening-line.bold { font-weight: 600; color: var(--pink); font-size: clamp(1.6rem, 3vw, 2.5rem); }
+
+    /* ── WHAT IT ACTUALLY IS ── */
+    .what { padding: 7rem 3rem; background: var(--cream); }
+    .what-inner { max-width: 900px; margin: 0 auto; }
+    .section-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--burgundy); opacity: 0.7; margin-bottom: 1rem; }
+    .section-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; color: var(--text-dark); margin-bottom: 2rem; line-height: 1.15; }
+    .what-text { font-size: 0.95rem; font-weight: 300; line-height: 1.95; color: var(--text-mid); max-width: 680px; }
+    .what-text + .what-text { margin-top: 1.2rem; }
+
+    /* ── COMPONENTS GRID ── */
+    .components { padding: 2rem 3rem 7rem; background: var(--cream); }
+    .components-inner { max-width: 900px; margin: 0 auto; }
+    .components-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; color: var(--text-dark); margin-bottom: 2rem; font-style: italic; }
+    .components-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .component-tag {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.78rem; font-weight: 300;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(123,30,53,0.2);
+      color: var(--text-mid);
+      transition: all 0.25s;
+    }
+    .component-tag:hover { background: var(--pink); border-color: var(--pink); color: var(--text-dark); }
+
+    /* ── THE QUESTION ── */
+    .the-question {
+      padding: 8rem 3rem;
+      background: linear-gradient(to right, var(--pink) 0%, #dba0b2 40%, #b05570 60%, var(--burgundy) 100%);
+      text-align: center;
+    }
+    .the-question .label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); opacity: 0.55; margin-bottom: 2rem; }
+    .the-question h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4.5vw, 4rem); font-weight: 300; font-style: italic; color: var(--cream); max-width: 760px; margin: 0 auto 2rem; line-height: 1.25; }
+    .the-question p { font-size: 0.95rem; font-weight: 300; color: rgba(253,246,240,0.75); max-width: 540px; margin: 0 auto; line-height: 1.85; }
+
+    /* ── WHAT CHANGES ── */
+    .changes { padding: 7rem 3rem; background: var(--cream); }
+    .changes-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .changes-left h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.2; }
+    .changes-left p { font-size: 0.9rem; font-weight: 300; line-height: 1.9; color: var(--text-mid); margin-bottom: 1rem; }
+    .changes-right { padding-top: 1rem; }
+    .change-line { display: flex; align-items: baseline; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(123,30,53,0.08); }
+    .change-line:last-child { border-bottom: none; }
+    .change-word { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; font-style: italic; color: var(--burgundy); min-width: 140px; }
+    .change-desc { font-size: 0.82rem; font-weight: 300; color: var(--text-mid); line-height: 1.6; }
+
+    /* ── SUBCONSCIOUS ── */
+    .subconscious {
+      padding: 7rem 3rem;
+      background: #fbedf0;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; max-width: 1100px; margin: 0 auto;
+      align-items: center;
+    }
+    .sub-text .section-label { text-align: left; }
+    .sub-text h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.2; }
+    .sub-text p { font-size: 0.9rem; font-weight: 300; line-height: 1.95; color: var(--text-mid); margin-bottom: 1rem; }
+    .sub-visual {
+      background: linear-gradient(160deg, var(--burgundy), var(--burg-deep));
+      padding: 4rem 3rem;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .sub-item { padding: 1.5rem 0; border-bottom: 1px solid rgba(253,246,240,0.1); }
+    .sub-item:last-child { border-bottom: none; }
+    .sub-item-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); opacity: 0.6; margin-bottom: 0.4rem; }
+    .sub-item-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.45; }
+
+    /* ── 30 YEARS ── */
+    .thirty-years {
+      padding: 8rem 3rem;
+      background: var(--cream);
+      text-align: center;
+    }
+    .thirty-years blockquote { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 4.5rem); font-weight: 300; color: var(--text-dark); max-width: 800px; margin: 0 auto 1.5rem; line-height: 1.15; }
+    .thirty-years blockquote em { font-style: italic; color: var(--burgundy); }
+    .thirty-years cite { display: block; font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--burgundy); opacity: 0.6; font-style: normal; margin-top: 1.5rem; }
+    .thirty-years p { font-size: 0.9rem; font-weight: 300; color: var(--text-mid); max-width: 500px; margin: 2rem auto 0; line-height: 1.85; }
+
+    /* ── NOT PERFECTION ── */
+    .not-perfection { padding: 7rem 3rem; background: #fbedf0; }
+    .not-perfection-inner { max-width: 860px; margin: 0 auto; }
+    .not-perfection h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--text-dark); margin-bottom: 2rem; line-height: 1.2; }
+    .not-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 3rem; }
+    .not-item { display: flex; align-items: center; gap: 1.5rem; padding: 1.2rem 0; border-bottom: 1px solid rgba(123,30,53,0.08); }
+    .not-item:last-child { border-bottom: none; }
+    .not-cross { font-size: 1rem; color: var(--pink); font-weight: 300; min-width: 20px; }
+    .not-word { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--text-dark); min-width: 180px; }
+    .not-desc { font-size: 0.85rem; font-weight: 300; color: var(--text-mid); line-height: 1.6; }
+    .not-perfection-close { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; font-style: italic; color: var(--burgundy); line-height: 1.4; border-left: 3px solid var(--burgundy); padding-left: 1.5rem; }
+
+    /* ── CTA ── */
+    .cta { padding: 8rem 3rem; background: var(--burg-deep); text-align: center; position: relative; overflow: hidden; }
+    .cta::before { content: ''; position: absolute; bottom: -8rem; left: 50%; transform: translateX(-50%); width: 50vw; height: 50vw; border-radius: 50%; background: rgba(245,208,216,0.04); }
+    .cta-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--pink); opacity: 0.55; margin-bottom: 1.5rem; }
+    .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 300; color: var(--cream); margin-bottom: 1.2rem; line-height: 1.15; position: relative; z-index: 1; }
+    .cta h2 em { font-style: italic; color: var(--pink); }
+    .cta p { font-size: 0.93rem; font-weight: 300; color: rgba(253,246,240,0.6); max-width: 480px; margin: 0 auto 3rem; line-height: 1.85; position: relative; z-index: 1; }
+    .cta-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+    .btn-primary { padding: 1.1rem 2.8rem; border: 1px solid var(--pink); color: var(--pink); font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+    .btn-primary:hover { background: var(--pink); color: var(--burg-deep); }
+    .btn-secondary { padding: 1.1rem 2.8rem; background: transparent; border: 1px solid rgba(253,246,240,0.2); color: rgba(253,246,240,0.5); font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+    .btn-secondary:hover { border-color: rgba(253,246,240,0.5); color: var(--cream); }
+
+    footer { padding: 3rem; background: var(--text-dark); display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--pink); }
+    .footer-line { font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(253,246,240,0.35); text-transform: uppercase; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; } .nav-links { display: none; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+      .hero::before { font-size: 90vw; }
+      .opening { padding: 5rem 1.5rem; }
+      .what, .components { padding: 4rem 1.5rem; }
+      .changes { padding: 5rem 1.5rem; }
+      .changes-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .subconscious { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+      .thirty-years { padding: 5rem 1.5rem; }
+      .not-perfection { padding: 5rem 1.5rem; }
+      .not-word { min-width: 130px; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Jo to Joanne</a>
+  <ul class="nav-links">
+    <li><a href="about.html">Story</a></li>
+    <li><a href="philosophy.html">Philosophy</a></li>
+    <li><a href="project-you.html">Project You</a></li>
+    <li><a href="anxiety.html">Anxiety Reset</a></li>
+    <li><a href="contact.html">Begin</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Joanne's Philosophy of Change</p>
+    <h1>This is not<br>a programme.<br><em>This is a lived truth.</em></h1>
+    <div class="hero-disclaimer">
+      <p>Not a fad diet. Not a quick fix. Not "be positive and your life will change."</p>
+      <p>This is what happens when one woman spends 53 years observing, surviving, rebuilding, and quietly figuring out what actually creates lasting change.</p>
+    </div>
+  </div>
+  <div class="hero-bar"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OPENING — WHAT IT'S NOT / WHAT IT IS -->
+<section class="opening">
+  <div class="opening-inner">
+    <p class="opening-label">Let's be honest first</p>
+    <div class="opening-lines">
+      <p class="opening-line struck">A wellness programme.</p>
+      <p class="opening-line struck">A diet plan.</p>
+      <p class="opening-line struck">Motivation and positive thinking.</p>
+      <p class="opening-line struck">Surface level. Any of it.</p>
+      <p class="opening-line bold">A philosophy built through living it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT IT ACTUALLY IS -->
+<section class="what">
+  <div class="what-inner">
+    <p class="section-label">What it actually is</p>
+    <h2 class="section-heading">A lived philosophy.<br>Built through everything.</h2>
+    <p class="what-text">Years of observation. Movement. Nervous system work. Subconscious rewiring. Foundations. Self-leadership. Identity change. Consistency. Relapse. Rebuilding. Awareness.</p>
+    <p class="what-text">And one central understanding that took 30 years to fully prove — but was always true.</p>
+    <p class="what-text">Project You was never really about weight loss. The weight loss was a side effect. What actually changed was the internal operating system.</p>
+    <p class="what-text">The real transformation happened somewhere else entirely.</p>
+  </div>
+</section>
+
+<!-- WHERE IT HAPPENED -->
+<section style="padding: 0 3rem 5rem; background: var(--cream);">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px;">
+      <div style="background: #fbedf0; padding: 2rem; text-align: center;">
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--text-dark);">In the mind.</p>
+      </div>
+      <div style="background: #f5d8de; padding: 2rem; text-align: center;">
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--text-dark);">In the subconscious.</p>
+      </div>
+      <div style="background: #edc4cc; padding: 2rem; text-align: center;">
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--text-dark);">In the patterns.</p>
+      </div>
+      <div style="background: #e5b0bc; padding: 2rem; text-align: center;">
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--text-dark);">In the nervous system.</p>
+      </div>
+      <div style="background: #da9cac; padding: 2rem; text-align: center;">
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--text-dark);">In the self-talk.</p>
+      </div>
+      <div style="background: linear-gradient(135deg, #ce8898, var(--burgundy)); padding: 2rem; text-align: center;">
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--cream);">In the awareness.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENTS -->
+<section class="components">
+  <div class="components-inner">
+    <h3 class="components-heading">This philosophy combines —</h3>
+    <div class="components-grid">
+      <span class="component-tag">Movement</span>
+      <span class="component-tag">Mindset</span>
+      <span class="component-tag">Subconscious work</span>
+      <span class="component-tag">Behaviour</span>
+      <span class="component-tag">Self-observation</span>
+      <span class="component-tag">Nutrition</span>
+      <span class="component-tag">Emotional awareness</span>
+      <span class="component-tag">Consistency</span>
+      <span class="component-tag">Identity</span>
+      <span class="component-tag">Routine</span>
+      <span class="component-tag">Nervous system regulation</span>
+    </div>
+    <p style="margin-top: 2rem; font-size: 0.88rem; font-weight: 300; color: var(--text-mid); font-style: italic;">Into one connected system.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THE QUESTION -->
+<section class="the-question">
+  <p class="label">The question that changes everything</p>
+  <h2>What happens when you finally learn how to work with yourself instead of against yourself?</h2>
+  <p>Most people are trying to change the outside while fighting a dysregulated internal system underneath. Joanne's Philosophy of Change asks a different question — and builds everything around the answer.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT CHANGES -->
+<section class="changes">
+  <div class="changes-inner">
+    <div class="changes-left">
+      <p class="section-label">When the internal system changes</p>
+      <h2>Everything changes.</h2>
+      <p>Not might change. Not could change. Changes. Because when the inside shifts, the outside has no choice but to follow.</p>
+      <p>This is not hope. This is what Joanne observed. In herself. Over 30 years. And now in the women who work with her.</p>
+    </div>
+    <div class="changes-right">
+      <div class="change-line">
+        <span class="change-word">Sleep</span>
+        <span class="change-desc">changes. The nervous system finally rests.</span>
+      </div>
+      <div class="change-line">
+        <span class="change-word">Thoughts</span>
+        <span class="change-desc">change. The loop quietens.</span>
+      </div>
+      <div class="change-line">
+        <span class="change-word">Patterns</span>
+        <span class="change-desc">change. Old defaults stop running.</span>
+      </div>
+      <div class="change-line">
+        <span class="change-word">Reactions</span>
+        <span class="change-desc">change. Space appears before the response.</span>
+      </div>
+      <div class="change-line">
+        <span class="change-word">Confidence</span>
+        <span class="change-desc">changes. Not performed. Felt.</span>
+      </div>
+      <div class="change-line">
+        <span class="change-word">The body</span>
+        <span class="change-desc">changes. As a side effect of everything else.</span>
+      </div>
+      <div class="change-line">
+        <span class="change-word">Life</span>
+        <span class="change-desc">changes.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBCONSCIOUS -->
+<div style="background: #fbedf0; padding: 2rem 0;">
+  <div class="subconscious">
+    <div class="sub-text">
+      <p class="section-label">The subconscious</p>
+      <h2>Understanding it became<br>life changing.</h2>
+      <p>For Joanne, understanding the subconscious quietened the chaos. It stopped the nightmares. It changed the way the system responded to life itself.</p>
+      <p>Not through willpower. Not through discipline. Through understanding what was running underneath — and learning how to work with it.</p>
+      <p>That understanding is built into every part of Project You.</p>
+    </div>
+    <div class="sub-visual">
+      <div class="sub-item">
+        <p class="sub-item-label">Before</p>
+        <p class="sub-item-text">Fighting the system. Exhausted. Nothing lasting.</p>
+      </div>
+      <div class="sub-item">
+        <p class="sub-item-label">The shift</p>
+        <p class="sub-item-text">Understanding what was actually running underneath.</p>
+      </div>
+      <div class="sub-item">
+        <p class="sub-item-label">After</p>
+        <p class="sub-item-text">Working with the system. Calm. Real. Lasting.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 30 YEARS -->
+<section class="thirty-years">
+  <blockquote>
+    If you look after the inside,<br>
+    <em>the outside looks after itself.</em>
+    <cite>— Joanne. Said for over 30 years.</cite>
+  </blockquote>
+  <p>Long before the science. Long before the psychology had words for it. She already understood something that most people spend their whole lives missing.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- NOT PERFECTION -->
+<section class="not-perfection">
+  <div class="not-perfection-inner">
+    <p class="section-label">What this is not</p>
+    <h2>Not perfection.<br>Not punishment.<br>Not pretending.</h2>
+    <div class="not-list">
+      <div class="not-item">
+        <span class="not-cross">✕</span>
+        <span class="not-word">Perfection</span>
+        <span class="not-desc">You don't need to be ready. You don't need to have it together. You just need to be honest.</span>
+      </div>
+      <div class="not-item">
+        <span class="not-cross">✕</span>
+        <span class="not-word">Punishment</span>
+        <span class="not-desc">No restriction. No shame. No starting over on Monday. Understanding replaces all of it.</span>
+      </div>
+      <div class="not-item">
+        <span class="not-cross">✕</span>
+        <span class="not-word">Pretending</span>
+        <span class="not-desc">Life doesn't become easy. But you become someone who knows how to lead themselves through it.</span>
+      </div>
+      <div class="not-item">
+        <span class="not-cross">✕</span>
+        <span class="not-word">Surface level</span>
+        <span class="not-desc">That's so last season. We're here for lasting.</span>
+      </div>
+    </div>
+    <p class="not-perfection-close">Just learning how to understand yourself well enough to lead yourself differently.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <p class="cta-label">Where to begin</p>
+  <h2>The philosophy is real.<br>The method is evolving.<br><em>The door is open.</em></h2>
+  <p>Choose where you want to start. There is no wrong answer. There is only honest.</p>
+  <div class="cta-buttons">
+    <a href="project-you.html" class="btn-primary">Explore Project You</a>
+    <a href="contact.html" class="btn-secondary">Begin the conversation</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Jo to Joanne</div>
+  <div class="footer-line">Self Return · Somerset</div>
+  <div class="footer-line">© 2026 Joanne</div>
+</footer>
+
+</body>
+</html>

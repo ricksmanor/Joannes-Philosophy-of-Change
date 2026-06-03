@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>joannes-philosophy-of-change — Self Return</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:      #e8a4a8;
+      --pink-mid:  #d4787e;
+      --mid:       #b85560;
+      --burgundy:  #6b1832;
+      --burg-deep: #3d0d1c;
+      --cream:     #fdf4f0;
+      --text-dark: #2a0e18;
+      --text-mid:  #5a2030;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── GRADIENT BACKGROUND SHARED ── */
+    .gradient-bg {
+      background: linear-gradient(to right, var(--pink) 0%, #dba0b2 40%, #b05570 60%, var(--burgundy) 100%);
+    }
+
+    /* ══════════════════════════════
+       NAV
+    ══════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: rgba(253,246,240,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(123,30,53,0.1);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      background: linear-gradient(to right, var(--pink-mid), var(--burgundy));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--burgundy); }
+
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 3rem;
+    }
+
+    /* The gradient wash — left pink, right burgundy */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(242,196,206,0.35) 0%,
+        rgba(219,160,178,0.2) 38%,
+        rgba(176,85,112,0.25) 62%,
+        rgba(123,30,53,0.38) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Soft grain texture */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      animation: fadeUp 1.2s ease both;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      margin-bottom: 1.8rem;
+      opacity: 0.8;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--text-dark);
+      margin-bottom: 2rem;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--burgundy);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-mid);
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 1rem 2.6rem;
+      background: var(--burgundy);
+      color: var(--cream);
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .hero-cta:hover {
+      background: var(--burg-deep);
+      transform: translateY(-2px);
+    }
+
+    /* Vertical gradient bar — right edge of hero */
+    .hero-bar {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 6px;
+      background: linear-gradient(to bottom, var(--pink), var(--burgundy));
+    }
+
+    /* ══════════════════════════════
+       GRADIENT DIVIDER
+    ══════════════════════════════ */
+    .divider {
+      height: 3px;
+      background: linear-gradient(to right, var(--pink), var(--mid), var(--burgundy));
+    }
+
+    /* ══════════════════════════════
+       QUOTE STRIP
+    ══════════════════════════════ */
+    .quote-strip {
+      padding: 5rem 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--cream);
+      position: relative;
+    }
+
+    .quote-strip blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      font-weight: 300;
+      font-style: italic;
+      text-align: center;
+      color: var(--text-dark);
+      max-width: 760px;
+      line-height: 1.4;
+      position: relative;
+    }
+
+    .quote-strip blockquote::before {
+      content: '"';
+      font-size: 8rem;
+      color: var(--pink);
+      position: absolute;
+      top: -3rem;
+      left: -2rem;
+      font-style: normal;
+      line-height: 1;
+      opacity: 0.6;
+    }
+
+    .quote-attr {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      margin-top: 1.5rem;
+      font-style: normal;
+    }
+
+    /* ══════════════════════════════
+       ABOUT — TWO COLUMN
+    ══════════════════════════════ */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+    }
+
+    .about-pink {
+      background: linear-gradient(135deg, #fbedf0, #f2c4ce);
+      padding: 6rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-burgundy {
+      background: linear-gradient(135deg, var(--mid), var(--burgundy));
+      padding: 6rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-pink .about-label { color: var(--burgundy); }
+    .about-burgundy .about-label { color: var(--pink); opacity: 0.8; }
+
+    .about-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-pink .about-heading { color: var(--text-dark); }
+    .about-burgundy .about-heading { color: var(--cream); }
+
+    .about-text {
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.9;
+    }
+
+    .about-pink .about-text { color: var(--text-mid); }
+    .about-burgundy .about-text { color: rgba(253,246,240,0.85); }
+
+    /* ══════════════════════════════
+       PROGRAMME
+    ══════════════════════════════ */
+    .programme {
+      padding: 7rem 3rem;
+      background: var(--cream);
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      opacity: 0.7;
+      margin-bottom: 1rem;
+    }
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 300;
+      color: var(--text-dark);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-intro {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      max-width: 560px;
+      margin: 0 auto 4rem;
+      line-height: 1.8;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .pillar {
+      padding: 3rem 2.5rem;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .pillar:hover { transform: translateY(-4px); }
+
+    .pillar:nth-child(1) { background: #fbedf0; }
+    .pillar:nth-child(2) { background: #f0d0d8; }
+    .pillar:nth-child(3) { background: #e8b8c6; }
+
+    .pillar-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--burgundy);
+      opacity: 0.18;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .pillar-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.8rem;
+    }
+
+    .pillar-text {
+      font-size: 0.87rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+
+    /* ══════════════════════════════
+       KEY LINES
+    ══════════════════════════════ */
+    .keylines {
+      padding: 6rem 3rem;
+      background: linear-gradient(to right, var(--pink) 0%, #dba0b2 40%, #b05570 60%, var(--burgundy) 100%);
+    }
+
+    .keylines-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem 5rem;
+    }
+
+    .keyline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.4;
+      padding-left: 1.2rem;
+      border-left: 2px solid rgba(253,246,240,0.35);
+    }
+
+    /* ══════════════════════════════
+       FOR YOU SECTION
+    ══════════════════════════════ */
+    .for-you {
+      padding: 7rem 3rem;
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .for-you-text {}
+
+    .for-you-text .section-heading {
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+
+    .for-you-text .section-label {
+      text-align: left;
+    }
+
+    .for-you-text p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.95;
+      color: var(--text-mid);
+      margin-bottom: 1rem;
+    }
+
+    .for-you-list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+
+    .for-you-list li {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(123,30,53,0.1);
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .for-you-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--burgundy);
+    }
+
+    .for-you-visual {
+      background: linear-gradient(160deg, var(--pink), var(--burgundy));
+      aspect-ratio: 3/4;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .for-you-visual::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: -20%;
+      width: 80%;
+      height: 80%;
+      border-radius: 50%;
+      background: rgba(253,246,240,0.08);
+    }
+
+    .for-you-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.4;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ══════════════════════════════
+       CTA SECTION
+    ══════════════════════════════ */
+    .cta-section {
+      padding: 8rem 3rem;
+      background: var(--burg-deep);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: -5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60vw;
+      height: 60vw;
+      border-radius: 50%;
+      background: rgba(242,196,206,0.06);
+    }
+
+    .cta-section .section-label { color: var(--pink); opacity: 0.6; }
+
+    .cta-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-sub {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: rgba(253,246,240,0.65);
+      max-width: 460px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 1.1rem 3rem;
+      border: 1px solid var(--pink);
+      color: var(--pink);
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-btn:hover {
+      background: var(--pink);
+      color: var(--burg-deep);
+    }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    footer {
+      padding: 3rem;
+      background: var(--text-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--pink);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-line {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: rgba(253,246,240,0.35);
+      text-transform: uppercase;
+    }
+
+    /* ══════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 6rem 1.5rem 4rem; }
+      .about { grid-template-columns: 1fr; }
+      .about-pink, .about-burgundy { padding: 4rem 1.5rem; }
+      .pillars { grid-template-columns: 1fr; gap: 2px; }
+      .keylines-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .for-you { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+      .for-you-visual { aspect-ratio: 4/3; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .quote-strip { padding: 4rem 1.5rem; }
+      .programme { padding: 5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Jo to Joanne</div>
+    <ul class="nav-links">
+      <li><a href="about.html">Story</a></li>
+      <li><a href="philosophy.html">Philosophy</a></li>
+      <li><a href="project-you.html">Project You</a></li>
+      <li><a href="anxiety.html">Anxiety Reset</a></li>
+      <li><a href="contact.html">Begin</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Jo to Joanne · Self Return · Project You</p>
+      <h1 class="hero-headline">
+        Jo survived.<br>
+        <em>Joanne gets to live.</em>
+      </h1>
+      <p class="hero-sub">
+        This isn't self improvement.<br>
+        This is self return.<br><br>
+        A transformational wellness and self-leadership brand helping women reconnect with themselves through mindset, nervous system awareness, identity work, nutrition, movement, emotional healing, and inside-out change.
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="contact.html" class="hero-cta">Begin Your Journey</a>
+        <a href="project-you.html" class="hero-cta" style="background:transparent;border:1px solid var(--burgundy);color:var(--burgundy);">Explore Project You</a>
+      </div>
+    </div>
+    <div class="hero-bar"></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- QUOTE -->
+  <section class="quote-strip">
+    <blockquote>
+      The wounds are in the library now.
+      <span class="quote-attr">— Joanne</span>
+    </blockquote>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT — SPLIT -->
+  <section class="about" id="about">
+    <div class="about-pink">
+      <p class="about-label">Who she was</p>
+      <h2 class="about-heading">Left school at 15.<br>Reading age 11.<br>Told she was trouble.</h2>
+      <p class="about-text">
+        She wasn't any of those things. She was AuDHD in a world that didn't have the words for her yet. She had a cinema in her mind, a library in her soul, and an Observer watching everything — quietly, calmly, waiting.
+        <br><br>
+        Jo spent 53 years not being seen. The sloth on the outside. The Tasmanian devil on the inside.
+      </p>
+    </div>
+    <div class="about-burgundy">
+      <p class="about-label">Who she is now</p>
+      <h2 class="about-heading">Built by everything.<br>Broken by nothing.<br>Here to hold the door.</h2>
+      <p class="about-text">
+        Joanne didn't find herself on a retreat or in a book. She found herself on a beach at 3am, talking to the universe, piece by piece — through menopause, through loss, through learning what her mind actually was.
+        <br><br>
+        Now she's building the map so other women don't have to find the beach alone.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROGRAMME -->
+  <section class="programme" id="programme">
+    <p class="section-label">The Programme</p>
+    <h2 class="section-heading">Project You</h2>
+    <p class="section-intro">
+      A 13-week reset to get back to base level. Mind, body, soul. Not behaviour change from the outside in — inside out.
+    </p>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <h3 class="pillar-title">The Mind</h3>
+        <p class="pillar-text">Rewire the subconscious. Bring the nervous system back online. Breathwork, meditation, journaling, positive self talk — and asking why when you want to break.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <h3 class="pillar-title">The Body</h3>
+        <p class="pillar-text">Nutrition taught like no other. Not a meal plan — a full education. Builds gently, strips back deliberately, ends with you understanding food completely.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <h3 class="pillar-title">The Soul</h3>
+        <p class="pillar-text">Walking therapy. A why book. Fitness that fits your life. Meets you where you are, works with what you have. The more you put in, the more you get out.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY LINES GRADIENT -->
+  <section class="keylines">
+    <div class="keylines-inner">
+      <p class="keyline">This is the last day you are ever unkind to yourself. It's law.</p>
+      <p class="keyline">If you look after the inside, the outside will look after itself.</p>
+      <p class="keyline">Same body. Same results. Different approach.</p>
+      <p class="keyline">Be the engineer of your own machine.</p>
+      <p class="keyline">What you do today is your tomorrow.</p>
+      <p class="keyline">Live it. Breathe it. Teach it.</p>
+    </div>
+  </section>
+
+  <!-- FOR YOU -->
+  <section id="for-you" style="background: var(--cream);">
+    <div class="for-you">
+      <div class="for-you-text">
+        <p class="section-label">Is This You</p>
+        <h2 class="section-heading">You look fine.<br>You know you're not.</h2>
+        <p>You're managing everything. Holding it together for everyone. But somewhere inside, quietly, you know this isn't how it was supposed to feel.</p>
+        <p>You don't need fixing. You need returning to yourself.</p>
+        <ul class="for-you-list">
+          <li>You've tried everything and nothing has stuck</li>
+          <li>You look after everyone except yourself</li>
+          <li>You're exhausted in a way sleep doesn't fix</li>
+          <li>You've forgotten what you actually like</li>
+          <li>You want change but don't know where to start</li>
+        </ul>
+      </div>
+      <div class="for-you-visual">
+        <p class="for-you-quote">"Built by a woman who wasn't seen for 53 years. Now building the map."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="cta">
+    <p class="section-label">Begin</p>
+    <h2 class="cta-headline">This is the last day<br>you are unkind to yourself.</h2>
+    <p class="cta-sub">Project You opens for new women on a rolling basis. If you're ready to begin, Joanne is ready to walk with you.</p>
+    <a href="#" class="cta-btn">I'm ready</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">joannes-philosophy-of-change</div>
+    <div class="footer-line">Self Return · Somerset · Project You</div>
+    <div class="footer-line">© 2026 Joanne</div>
+  </footer>
+
+</body>
+</html>
